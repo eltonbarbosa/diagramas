@@ -1,0 +1,29 @@
+@startuml
+left to right direction
+
+class Cliente
+class Restaurante
+
+class Pedido {
+	-id: Integer
+	-status: String
+	+calcularTotal(): Decimal
+}
+
+class Prato
+class Entregador
+
+abstract class Pagamento
+class PagamentoCartao
+class PagamentoPix
+
+Cliente "1" -- "0..*" Pedido : realiza
+Restaurante "1" -- "0..*" Prato : oferece
+Pedido "0..*" -- "1..*" Prato : contém
+Entregador "0..1" -- "0..*" Pedido : entrega
+
+Pedido "1" -- "1" Pagamento : utiliza
+Pagamento <|-- PagamentoCartao
+Pagamento <|-- PagamentoPix
+
+@enduml
