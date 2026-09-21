@@ -1,0 +1,14 @@
+@startuml Diagramas_14-09-2026
+actor "Usuário" as user
+actor "API buscar CEP Correios" as correio
+
+rectangle "Sistema" {
+    usecase "Cadastrar Usuário" as UC1
+    usecase "Consultar CEP" as UC2
+
+    user --> UC1
+    correio --> UC2
+    UC1.> UC2 : <<include>>
+}
+
+@enduml

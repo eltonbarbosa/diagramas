@@ -1,0 +1,48 @@
+@startuml Diagramas_classe
+
+class Pedido {
+    -id: int
+    -data: Date
+    -status: String
+}
+
+class ItemPedido {
+    -id: int
+    -quantidade: int
+    -precoUnitario: float
+}
+
+Pedido "1" *-- "0..*" ItemPedido : contém
+
+
+class Papel {
+    -id: int
+    -nome: String
+
+    +boolean verificarPapel(String nomePapel)
+}
+
+class Permissao {
+    -id: int
+    -nome: String
+
+    +boolean verificarPermissao(String nomePermissao)
+}
+
+class PapelPermissao {
+    -id: int
+}
+
+class Usuario {
+    -id: int
+    -nome: String
+    -email: String
+    -senha: String
+
+    +boolean verificarUsuario(String email, String senha)
+}
+
+Papel "0..*" -- "0..*" Permissao : possui
+(Papel, Permissao) -- PapelPermissao : "associa"
+Usuario "0..*" -- "1..*" PapelPermissao : "tem"
+@enduml

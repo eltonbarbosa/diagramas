@@ -1,0 +1,41 @@
+@startuml Centro_Universitario
+left to right direction
+
+class Curso {
+	-codigo: String
+	-nome: String
+	-cargaHorariaTotal: Integer
+}
+
+class Disciplina {
+	-codigo: String
+	-nome: String
+}
+
+class Turma {
+	-codigoTurma: String
+	-ano: Integer
+	-semestreLetivo: Integer
+}
+
+class Pessoa {
+	-id: Integer
+	-nome: String
+	-email: String
+}
+
+class Professor {
+	-codigoSIAPE: String
+}
+
+class Aluno {
+	-matricula: String
+}
+
+Curso "1" *-- "1..*" Disciplina : possui / pertenceAoCurso
+Disciplina "1" -- "0..*" Turma : oferta / pertenceADisciplina
+Professor "0..*" -- "1" Turma : ministra / eMinistradaPor
+
+Pessoa <|-- Professor
+Pessoa <|-- Aluno
+@enduml

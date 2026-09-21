@@ -1,0 +1,31 @@
+@startuml Clinica_Veterinaria
+left to right direction
+
+actor "Tutor (Cliente)" as tutor
+actor "Veterinário" as veterinario
+actor "Gateway de Pagamento" as gateway
+
+rectangle "Sistema da Clínica Veterinária" {
+	usecase "Agendar Consulta" as UC_Agendar
+	usecase "Visualizar Histórico de Atendimentos" as UC_Historico
+	usecase "Validar Disponibilidade de Horário" as UC_Validar
+	usecase "Solicitar Transporte Busca-e-Traz" as UC_Transporte
+	usecase "Registrar Prontuário do Atendimento" as UC_Prontuario
+	usecase "Prescrever Medicamentos" as UC_Prescrever
+	usecase "Processar Pagamento da Consulta" as UC_Pagamento
+
+	UC_Agendar .> UC_Validar : <<include>>
+	UC_Transporte .> UC_Agendar : <<extend>>\n[se o tutor solicitar transporte]
+
+	note right of UC_Agendar
+		Extension point:
+		transporteSolicitado
+	end note
+}
+
+tutor -- UC_Agendar
+tutor -- UC_Historico
+veterinario -- UC_Prontuario
+veterinario -- UC_Prescrever
+gateway -- UC_Pagamento
+@enduml
